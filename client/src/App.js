@@ -1,0 +1,101 @@
+import React, { Fragment, useState } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import './App.css';
+import Navbar from './components/layout/Navbar'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
+import Home from './components/pages/Home'
+import Footer from './components/layout/Footer'
+import Policy from './components/pages/Policy'
+
+const App = () => {
+  const [products, getProducts] = useState([
+    {
+      name: 'Apple Watch Series 5',
+      description: 'I just want to sell my clock',
+      price: 500,
+      location: 'Boston, USA',
+      category: 'Electronics'
+    },
+    {
+      name: 'Audi RS 6',
+      description: 'I just want to sell my car',
+      price: 50000,
+      location: 'Kiev, Ukraine',
+      category: 'Vehicles'
+    },
+    {
+      name: 'New black coat',
+      description: 'I just want to sell my coat',
+      price: 300,
+      location: 'Berlin, Germany',
+      category: 'Clothing & Accessories'
+    },
+    {
+      name: 'Leather jacket',
+      description: 'I just want to sell my jacket',
+      price: 300,
+      location: 'Krakow, Poland',
+      category: 'Clothing & Accessories'
+    },
+    {
+      name: 'McDonnell Douglas AH-64 Apache',
+      description: 'I just want to sell my Apache',
+      price: 300000,
+      location: 'Ostin, USA',
+      category: 'Vehicles'
+    },
+    // 
+    {
+      name: 'Apple Watch Series 5',
+      description: 'I just want to sell my clock',
+      price: 500,
+      location: 'Boston, USA',
+      category: 'Electronics'
+    },
+    {
+      name: 'Audi RS 6',
+      description: 'I just want to sell my car',
+      price: 50000,
+      location: 'Kiev, Ukraine',
+      category: 'Vehicles'
+    },
+    {
+      name: 'New black coat',
+      description: 'I just want to sell my coat',
+      price: 300,
+      location: 'Berlin, Germany',
+      category: 'Clothing & Accessories'
+    },
+    {
+      name: 'Leather jacket',
+      description: 'I just want to sell my jacket',
+      price: 300,
+      location: 'Krakow, Poland',
+      category: 'Clothing & Accessories'
+    },
+    {
+      name: 'McDonnell Douglas AH-64 Apache',
+      description: 'I just want to sell my Apache',
+      price: 300000,
+      location: 'Ostin, USA',
+      category: 'Vehicles'
+    }
+  ])
+  return (
+    <BrowserRouter>
+      <div className='main'>
+        <Navbar />
+        <Switch>
+          <Route exact path='/' render={(props) => <Home {...props} products={products} />}></Route>
+          <Route exact path='/login' component={Login}></Route>
+          <Route exact path='/register' component={Register}></Route>
+          <Route exact path='/policy' component={Policy}></Route>
+        </Switch>
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
