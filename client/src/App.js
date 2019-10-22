@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.css';
 import Navbar from './components/layout/Navbar'
@@ -7,9 +7,15 @@ import Register from './components/auth/Register'
 import Home from './components/pages/Home'
 import Footer from './components/layout/Footer'
 import Policy from './components/pages/Policy'
+import { Provider } from 'react-redux';
+import store from './store/store';
+import SetAuthToken from '../src/utils/SetAuthToken'
 
+if (localStorage.token) {
+  SetAuthToken(localStorage.token);
+}
 const App = () => {
-  const [products, getProducts] = useState([
+  const [products, setProducts] = useState([
     {
       name: 'Apple Watch Series 5',
       description: 'I just want to sell my clock',
@@ -45,7 +51,6 @@ const App = () => {
       location: 'Ostin, USA',
       category: 'Vehicles'
     },
-    // 
     {
       name: 'Apple Watch Series 5',
       description: 'I just want to sell my clock',
@@ -83,18 +88,20 @@ const App = () => {
     }
   ])
   return (
-    <BrowserRouter>
-      <div className='main'>
-        <Navbar />
-        <Switch>
-          <Route exact path='/' render={(props) => <Home {...props} products={products} />}></Route>
-          <Route exact path='/login' component={Login}></Route>
-          <Route exact path='/register' component={Register}></Route>
-          <Route exact path='/policy' component={Policy}></Route>
-        </Switch>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <div className='main'>
+          <Navbar />
+          <Switch>
+            <Route exact path='/' render={(props) => <Home {...props} products={products} />}></Route>
+            <Route exact path='/login' component={Login}></Route>
+            <Route exact path='/register' component={Register}></Route>
+            <Route exact path='/policy' component={Policy}></Route>
+          </Switch>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import ProductItem from './ProductItem'
 
 const Products = ({ products }) => {
