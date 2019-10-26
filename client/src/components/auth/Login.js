@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import showPassIcon from '../../res/show-pass-icon.svg'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -6,6 +6,8 @@ import { loginRequest, clearErrors } from '../../store/actions/AuthAction'
 import { alertRequest } from '../../store/actions/AlertAction'
 import Alerts from '../layout/Alerts'
 import showHidePassword from '../../utils/Show-HidePassword'
+import Navbar from '../layout/Navbar'
+import Footer from '../layout/Footer'
 
 const Login = (props) => {
     const { auth: { isAuthenticated, error }, alerts: { alertsArray }, loginRequest, clearErrors, alertRequest } = props;
@@ -20,7 +22,7 @@ const Login = (props) => {
             }
             clearErrors();
         }
-    }, [error, isAuthenticated,props.history]);
+    }, [error, isAuthenticated, props.history, alertRequest, alertsArray.length, clearErrors]);
     const [user, setUser] = useState({
         email: '',
         password: ''
@@ -45,28 +47,32 @@ const Login = (props) => {
         }
     }
     return (
-        <div className='content-wrapper auth-wrapper'>
-            <div className='card'>
-                <div className='auth-label'>Login</div>
-                <form className='auth-form' onSubmit={onSubmit}>
-                    <div className='form-group'>
-                        <label htmlFor='email'>Email</label><br />
-                        <input type='email' name='email' placeholder='Example@gmail.com' onChange={onChange} value={email} />
-                    </div>
-                    <div className='form-group'>
-                        <label htmlFor='password'>Password</label><br />
-                        <input type='password' name='password' onChange={onChange} value={password} />
-                        <img src={showPassIcon} alt='show-password' className='show-password' onClick={showHidePassword} />
-                    </div>
-                    <Link to='/' className='restore-pass-link'>Don't remember password?</Link>
-                    <input type='submit' value='Continue' className='auth-button ' />
-                </form>
+        <Fragment>
+            <Navbar background={false} />
+            <div className='content-wrapper auth-wrapper'>
+                <div className='card auth-card'>
+                    <div className='card-label'>Login</div>
+                    <form className='card-funct-form' onSubmit={onSubmit}>
+                        <div className='form-group'>
+                            <label htmlFor='email'>Email</label><br />
+                            <input type='email' name='email' placeholder='Example@gmail.com' onChange={onChange} value={email} />
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='password'>Password</label><br />
+                            <input type='password' name='password' onChange={onChange} value={password} />
+                            <img src={showPassIcon} alt='show-password' className='show-password' onClick={showHidePassword} />
+                        </div>
+                        <Link to='/' className='restore-pass-link'>Don't remember password?</Link>
+                        <input type='submit' value='Continue' className='card-submit-button' />
+                    </form>
+                </div>
+                <Alerts />
+                <div className='card auth-card redirect-card'>
+                    <span>I have no account,</span><Link to='/register' className='redirect-label'>Register now</Link>
+                </div>
             </div>
-            <Alerts />
-            <div className='card redirect-card'>
-                <span>I have no account,</span><Link to='/register' className='redirect-label'>Register now</Link>
-            </div>
-        </div>
+            <Footer />
+        </Fragment>
     )
 }
 const mapStateToProps = state => ({

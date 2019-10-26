@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Filter from '../layout/Filter'
+import Navbar from '../layout/Navbar'
+import Footer from '../layout/Footer'
 import Products from '../products/Products'
 
-const Home = ({products}) => {
+const Home = ({ products }) => {
     return (
-        <div className='content-wrapper'>
-            <Filter/>
-            {/* <Products products={products}/> */}
-        </div>
+        <Fragment>
+            <Navbar background={true} extendedBackground={true} />
+            <div className='content-wrapper'>
+                <Filter />
+                {/* <Products products={products}/> */}
+            </div>
+            <Footer />
+        </Fragment>
     )
 }
 

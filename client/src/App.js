@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.scss';
-import Navbar from './components/layout/Navbar'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Home from './components/pages/Home'
-import Footer from './components/layout/Footer'
+import AddProduct from './components/products/AddProduct'
 import Policy from './components/pages/Policy'
 import { Provider } from 'react-redux';
 import store from './store/store';
@@ -92,15 +91,14 @@ const App = () => {
     <Provider store={store}>
       <BrowserRouter>
         <div className='main'>
-          <Navbar />
           <Switch>
             {/* <PrivateRoute exact path='/' render={(props) => <Home {...props} products={products} />}/> */}
-            <PrivateRoute exact path='/' component={Home}/>
             <Route exact path='/login' component={Login}></Route>
             <Route exact path='/register' component={Register}></Route>
-            <Route exact path='/policy' component={Policy}></Route>
+            <PrivateRoute exact path='/' component={Home} />
+            <PrivateRoute exact path='/sell' component={AddProduct}></PrivateRoute>
+            <PrivateRoute exact path='/policy' component={Policy}></PrivateRoute>
           </Switch>
-          <Footer />
         </div>
       </BrowserRouter>
     </Provider>

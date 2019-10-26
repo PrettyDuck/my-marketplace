@@ -1,9 +1,15 @@
-import React,{Fragment} from 'react'
+import React, { Fragment } from 'react'
+import Navbar from '../layout/Navbar'
+import Footer from '../layout/Footer'
 
 const Policy = () => {
     return (
         <Fragment>
-            Our Privacy Policy
+            <Navbar background={true} extendedBackground={true} />
+            <div className='content-wrapper'>
+                Our Privacy Policy
+            </div>
+            <Footer />
         </Fragment>
     )
 }

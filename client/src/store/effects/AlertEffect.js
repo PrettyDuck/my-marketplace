@@ -1,4 +1,4 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { all, put, takeEvery } from 'redux-saga/effects';
 import { setAlert,removeAlert } from '../actions/AlertAction';
 
 const delay = (timeout) => new Promise(res=>setTimeout(res,timeout));
