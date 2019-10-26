@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { registerRequest, clearErrors } from '../../store/actions/AuthAction'
 import { alertRequest } from '../../store/actions/AlertAction'
 import Alerts from '../layout/Alerts'
+import  showHidePassword  from '../../utils/Show-HidePassword'
 
 
 const Register = (props) => {
@@ -56,7 +57,7 @@ const Register = (props) => {
     }
     return (
         <div className='content-wrapper auth-wrapper'>
-            <div className='auth-card'>
+            <div className='card'>
                 <div className='auth-label'>Register</div>
                 <form className='auth-form' onSubmit={onSubmit}>
                     <div className='form-group'>
@@ -70,18 +71,18 @@ const Register = (props) => {
                     <div className='form-group'>
                         <label htmlFor='password'>Password</label><br />
                         <input type='password' name='password' onChange={onChange} value={password} />
-                        <img src={showPassIcon} alt='show-password' className='show-password' />
+                        <img src={showPassIcon} alt='show-password' className='show-password' onClick = {showHidePassword} />
                     </div>
                     <div className='form-group'>
                         <label htmlFor='password'>Password Again</label><br />
                         <input type='password' name='secondPassword' onChange={onChange} />
-                        <img src={showPassIcon} alt='show-password' className='show-password' />
+                        <img src={showPassIcon} alt='show-password' className='show-password' onClick = {showHidePassword}/>
                     </div>
                     <input type='submit' value='Register' className='auth-button ' />
                 </form>
             </div>
             <Alerts />
-            <div className='auth-card redirect-card'>
+            <div className='card redirect-card'>
                 <span>I already have an account,</span><Link to='/login' className='redirect-label'>Log in</Link>
             </div>
         </div>

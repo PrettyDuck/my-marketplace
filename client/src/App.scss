@@ -1,3 +1,6 @@
+$primary-color: #ffffff;
+$secondary-color: #349A89;
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,12 +12,17 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
-.dark-bg {
+ul{
+    list-style: none;
+}
+
+.dark-nav-bg {
     background: linear-gradient(180deg, #090810 0%, #171236 100%);
 }
 
 a {
     text-decoration: none;
+    color:inherit;
 }
 
 .main {
@@ -36,7 +44,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 82%;
+    width: 80%;
     margin: 0 auto;
     padding-top: 18px;
 }
@@ -46,34 +54,27 @@ a {
 }
 
 .nav-container {
-    list-style: none;
-    display: inline-grid;
-    grid-template-columns: 50% 25% 25%;
+    display: grid;
+    grid-template-columns: 9vw 3vw 1.5vw;
     grid-template-rows: 100%;
-    flex-basis: 23%;
+    grid-gap: 3vw;
     align-items: center;
     text-align: center;
-    justify-content: space-between;
 }
 
 .nav-container li {
     text-transform: uppercase;
 }
 
-.light-nav-content {
-    font-size: 12px;
-    color: #2B2B2B;
-}
-
 .dark-nav-content {
-    color: #ffffff;
+    color: $primary-color;
 }
 
 .nav-button, .search-submit, .auth-button {
     font-size: 14px;
     text-transform: uppercase;
     cursor: pointer;
-    color: #ffffff;
+    color: $primary-color;
     border: none;
     border-radius: 4px;
     padding: 8px 25px;
@@ -81,7 +82,7 @@ a {
 
 .nav-button {
     width: 100%;
-    background-color: #349A89;
+    background-color: $secondary-color;
     
 }
 /* Search */
@@ -110,7 +111,7 @@ a {
     border: none;
     border-radius: 4px;
     font-size: 16px;
-    background-color: #ffffff;
+    background-color: $primary-color;
     background-repeat: no-repeat;
     background-position: 10px center;
     padding: 12px 20px 12px 40px;
@@ -161,20 +162,13 @@ a {
         width: 90%;
     }
 }
-
-@media(max-width: 1024px) {
+@media(max-width: 1280px){
     .nav-container {
         grid-template-columns: 100%;
         grid-template-rows: auto;
+        grid-gap: 1vw;
     }
 }
-
-@media(min-width: 1440px) {
-    .card-form {
-        width: 80%;
-    }
-}
-
 /* Footer */
 
 .footer {
@@ -196,9 +190,9 @@ a {
     margin: 128px 0 220px;
 }
 
-.auth-card {
+.card {
     width: 30%;
-    background-color: #ffffff;
+    background-color: $primary-color;
     border-radius: 7px;
     box-shadow: 0px 2px 42px rgba(0, 0, 0, 0.111233);
     display: flex;
@@ -257,7 +251,7 @@ a {
 }
 
 .auth-button {
-    background-color: #349A89;
+    background-color: $secondary-color;
     text-transform: none;
     height: 60px;
     margin: 20px 24px;
@@ -265,13 +259,13 @@ a {
 }
 
 @media(max-width: 1024px) {
-    .auth-card {
+    .card {
         width: 50%;
     }
 }
 
 @media(max-width: 425px) {
-    .auth-card {
+    .card {
         width: 75%;
     }
 }
@@ -289,7 +283,7 @@ a {
 }
 
 .redirect-label {
-    color: #349A89;
+    color: $secondary-color;
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -297,7 +291,7 @@ a {
 /* Filter Card */
 
 .filter-form {
-    background-color: #FFFFFF;
+    background-color: $primary-color;
     border-radius: 4px;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.217111);
 }
@@ -326,19 +320,48 @@ a {
     margin-left: 24px;
     padding: 10px;
 }
+/*User Interface Card*/
+.user-interface-card
+{
+    position: absolute;
+    background-color:$primary-color;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    top:9%;
+    right: 14%;
+    height: 150px;
+    width: 14%;
+    visibility: hidden;
+}
+.user-interface-items{
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.user-interface-items li{
+  
+}
+.user-interface-button{
+    width: 100%;
+    height: 21%;
+    padding-left: 16px;
+}
 
 /* Products */
 
 .products-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 24%);
-    grid-template-rows: repeat(3, 210px);
+    grid-template-rows: repeat(3, auto);
     grid-column-gap: 7px;
     grid-row-gap: 14px;
 }
 
 .product-item {
-    background: #ffffff;
+    background: $primary-color;
     border: 1px solid #E4E4E4;
     box-shadow: 0px 4px 14px rgba(121, 121, 121, 0.0527344);
     border-radius: 4px;

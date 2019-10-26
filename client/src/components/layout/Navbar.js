@@ -6,11 +6,13 @@ import FavoritesBlack from '../../res/favorites-black.svg'
 import FavoritesWhite from '../../res/favorites-white.svg'
 import { connect } from 'react-redux'
 import { logout } from '../../store/actions/AuthAction'
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
     const background = false;
     const extendedBackground = true;
     const onLogout = () => {
+        document.querySelector('.user-interface-card').style.visibility = 'hidden';
         logout();
     }
     const SearchForm = (
@@ -22,22 +24,26 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
             </form>
         </div>
     )
-    const colorPicker = () =>
-    {
-        const hex = ['#ff4000','#ff8000','#ffbf00','#ffff00','#bfff00','#80ff00','#40ff00',
-        '#00ff00','#00ff40','#00ff80','#00ffbf','#00ffff','#00bfff','#0080ff','#0040ff',
-        '#0000ff','#4000ff','#8000ff','#bf00ff','#ff00ff','#ff00bf','#ff0080','#ff0040','#ff0000'];
-        var item =  hex[Math.floor(Math.random()*hex.length)];
-        return item;
+    const colorPicker = () => {
+        var a = Math.round(Math.random() * 345);
+        return `hsl(${a}, 100%, 70%)`;
+    }
+    const getAbbr = () => {
+        if (user !== null) {
+            const arr = user.name.split(" ");
+            const abbr = arr.map((item) => item.charAt(0));
+            return abbr;
+        }
     }
     const logedIconStyle = {
         borderRadius: '50%',
-        backgroundColor:`${colorPicker()}`,
+        backgroundColor: `${colorPicker()}`,
         width: '40px',
         height: '40px',
-        display:'flex',
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        color: 'rgra(19,15,2,0.72)'
     }
     const lightNavbar = (
         <Fragment>
@@ -49,7 +55,7 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
                             <Link to='#'><button className='nav-button'>Sell</button></Link>
                         </li>
                         <li>
-                            <Link to='/login' className='light-nav-content'>Login</Link>
+                            <Link to='/login' style={{color: '#2B2B2B'}}>Login</Link>
                         </li>
                         <li>
                             <Link to='/'><img src={FavoritesBlack} alt='Favorites' className='favorites' /></Link>
@@ -68,14 +74,16 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
     );
     const authLinks = (
         <Fragment>
-            <li style = {{ display:'flex', justifyContent: 'center',alignItems:'center'}}>
-                <span style={logedIconStyle}></span>
+            <li style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <span style={logedIconStyle}  onClick={() => {
+                    document.querySelector('.user-interface-card').style.visibility = 'visible'
+                }}>{getAbbr()}</span>
             </li>
         </Fragment>
     );
     const darkNavbar = (
         <Fragment>
-            <nav className='dark-bg'>
+            <nav className='dark-nav-bg'>
                 <div className='nav-wrapper'>
                     <Link to='/'><img src={LogoWhite} alt='Logo' className='logo' /></Link>
                     <ul className='nav-container'>
@@ -90,6 +98,29 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
                 </div>
                 {extendedBackground ? SearchForm : null}
             </nav>
+            <OutsideClickHandler
+                onOutsideClick={() => {
+                    if (document.querySelector('.user-interface-card').style.visibility === 'visible') {
+                        document.querySelector('.user-interface-card').style.visibility = 'hidden'
+                    }
+                }}>
+                <div className='user-interface-card'>
+                    <ul className='user-interface-items'>
+                        <li>
+                            <span style={logedIconStyle}>{getAbbr()}</span>
+                            {
+                                
+                            }
+                        </li>
+                        <li className='user-interface-button' style={{borderBottom:'1px solid #E4E4E4'}}>
+                            <a href='#'>Edit Profile</a>
+                        </li>
+                        <li className='user-interface-button'>
+                            <a href='#' onClick={onLogout}>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </OutsideClickHandler>
         </Fragment>
     )
     return (

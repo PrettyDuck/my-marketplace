@@ -6,7 +6,7 @@ import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons'
 const Alerts = ({ alerts }) => {
     return (
         alerts.alertsArray.length > 0 && alerts.alertsArray.map((alert) => (
-            <div key={alert.id} className='auth-card redirect-card'>
+            <div key={alert.id} className='card redirect-card'>
                 <FontAwesomeIcon icon = {faExclamationTriangle}/>{alert.msg}
             </div>
         ))

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { loginRequest, clearErrors } from '../../store/actions/AuthAction'
 import { alertRequest } from '../../store/actions/AlertAction'
 import Alerts from '../layout/Alerts'
+import showHidePassword from '../../utils/Show-HidePassword'
 
 const Login = (props) => {
     const { auth: { isAuthenticated, error }, alerts: { alertsArray }, loginRequest, clearErrors, alertRequest } = props;
@@ -19,7 +20,7 @@ const Login = (props) => {
             }
             clearErrors();
         }
-    }, [error, isAuthenticated]);
+    }, [error, isAuthenticated,props.history]);
     const [user, setUser] = useState({
         email: '',
         password: ''
@@ -45,7 +46,7 @@ const Login = (props) => {
     }
     return (
         <div className='content-wrapper auth-wrapper'>
-            <div className='auth-card'>
+            <div className='card'>
                 <div className='auth-label'>Login</div>
                 <form className='auth-form' onSubmit={onSubmit}>
                     <div className='form-group'>
@@ -55,14 +56,14 @@ const Login = (props) => {
                     <div className='form-group'>
                         <label htmlFor='password'>Password</label><br />
                         <input type='password' name='password' onChange={onChange} value={password} />
-                        <img src={showPassIcon} alt='show-password' className='show-password' />
+                        <img src={showPassIcon} alt='show-password' className='show-password' onClick={showHidePassword} />
                     </div>
                     <Link to='/' className='restore-pass-link'>Don't remember password?</Link>
                     <input type='submit' value='Continue' className='auth-button ' />
                 </form>
             </div>
             <Alerts />
-            <div className='auth-card redirect-card'>
+            <div className='card redirect-card'>
                 <span>I have no account,</span><Link to='/register' className='redirect-label'>Register now</Link>
             </div>
         </div>

@@ -6,7 +6,7 @@ const Home = ({products}) => {
     return (
         <div className='content-wrapper'>
             <Filter/>
-            <Products products={products}/>
+            {/* <Products products={products}/> */}
         </div>
     )
 }

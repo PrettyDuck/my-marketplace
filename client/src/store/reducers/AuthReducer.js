@@ -1,8 +1,8 @@
 import {
     REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS,
-    LOGIN_FAIL, LOGOUT, USER_LOADED, AUTH_ERROR, CLEAR_ERRORS,
+    LOGIN_FAIL, LOGOUT, USER_LOADED, AUTH_ERROR, CLEAR_ERRORS, storedState
 } from '../actions/types';
-const initialState = {
+const initialState = storedState !== null ? storedState.auth : {
     token: localStorage.getItem('token'),
     loading: false,
     user: null,
@@ -20,9 +20,9 @@ export default (state = initialState, action) => {
             }
         case REGISTER_REQUEST:
         case LOGIN_REQUEST:
-            return{
+            return {
                 ...state,
-                loading:true
+                loading: true
             }
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:

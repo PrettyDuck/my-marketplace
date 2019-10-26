@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import './App.css';
+import './App.scss';
 import Navbar from './components/layout/Navbar'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
@@ -10,6 +10,7 @@ import Policy from './components/pages/Policy'
 import { Provider } from 'react-redux';
 import store from './store/store';
 import SetAuthToken from '../src/utils/SetAuthToken'
+import PrivateRoute from '../src/components/routing/PrivateRoute'
 
 if (localStorage.token) {
   SetAuthToken(localStorage.token);
@@ -93,7 +94,8 @@ const App = () => {
         <div className='main'>
           <Navbar />
           <Switch>
-            <Route exact path='/' render={(props) => <Home {...props} products={products} />}></Route>
+            {/* <PrivateRoute exact path='/' render={(props) => <Home {...props} products={products} />}/> */}
+            <PrivateRoute exact path='/' component={Home}/>
             <Route exact path='/login' component={Login}></Route>
             <Route exact path='/register' component={Register}></Route>
             <Route exact path='/policy' component={Policy}></Route>
