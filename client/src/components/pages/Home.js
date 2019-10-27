@@ -4,13 +4,13 @@ import Navbar from '../layout/Navbar'
 import Footer from '../layout/Footer'
 import Products from '../products/Products'
 
-const Home = ({ products }) => {
+const Home = () => {
     return (
         <Fragment>
             <Navbar background={true} extendedBackground={true} />
             <div className='content-wrapper'>
                 <Filter />
-                {/* <Products products={products}/> */}
+                <Products />
             </div>
             <Footer />
         </Fragment>

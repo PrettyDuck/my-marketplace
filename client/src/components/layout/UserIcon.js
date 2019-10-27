@@ -12,7 +12,8 @@ const UserIcon = (props) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: 'rgra(19,15,2,0.72)'
+        color: 'rgra(19,15,2,0.72)',
+        cursor: 'pointer'
     }
     const getAbbr = () => {
         if (user !== null) {

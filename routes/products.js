@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth')
 const { check, validationResult } = require('express-validator');
-const User = require('../models/User');
 const Product = require('../models/Product');
 
 // @route GET api/products
@@ -11,9 +10,13 @@ const Product = require('../models/Product');
 
 router.get('/', auth, async (req, res) => {
     try {
-        const products = await Product.find({
-            user: req.user.id
-        }).sort({ date: -1 });
+        // In case if we want to show only products 
+
+        // const products = await Product.find({
+        //     user: req.user.id
+        // }).sort({ date: -1 });
+
+        const products = await Product.find().sort({ date: -1 });
         res.json(products);
     } catch (error) {
         console.error(error.message);
@@ -38,13 +41,14 @@ router.post('/', [auth, [
             errors: errors.array()
         })
     }
-    const { name, description, price, location } = req.body;
+    const { name, location, description, category, price } = req.body;
     try {
         const newProduct = new Product({
             name,
-            description,
-            price,
             location,
+            description,
+            category,
+            price,
             user: req.user.id
         });
         const product = await newProduct.save();
@@ -60,14 +64,15 @@ router.post('/', [auth, [
 // @access Private
 
 router.put('/:id', auth, async (req, res) => {
-    const { name, description, price, location } = req.body;
+    const { name, location, description, category, price } = req.body;
 
     // Build product object
     const productFields = {};
     if (name) productFields.name = name;
-    if (description) productFields.description = description;
-    if (price) productFields.price = price;
     if (location) productFields.location = location;
+    if (description) productFields.description = description;
+    if (category) productFields.category = category;
+    if (price) productFields.price = price;
     try {
         let product = await Product.findById(req.params.id);
         if (!product) return res.status(404).json({ msg: 'Product not found' });

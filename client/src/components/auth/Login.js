@@ -55,11 +55,11 @@ const Login = (props) => {
                     <form className='card-funct-form' onSubmit={onSubmit}>
                         <div className='form-group'>
                             <label htmlFor='email'>Email</label><br />
-                            <input type='email' name='email' placeholder='Example@gmail.com' onChange={onChange} value={email} />
+                            <input type='email' name='email' className='primary-input' placeholder='Example@gmail.com' value={email} onChange={onChange} />
                         </div>
                         <div className='form-group'>
                             <label htmlFor='password'>Password</label><br />
-                            <input type='password' name='password' onChange={onChange} value={password} />
+                            <input type='password' name='password' className='primary-input' value={password} onChange={onChange} />
                             <img src={showPassIcon} alt='show-password' className='show-password' onClick={showHidePassword} />
                         </div>
                         <Link to='/' className='restore-pass-link'>Don't remember password?</Link>

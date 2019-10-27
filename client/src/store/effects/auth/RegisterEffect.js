@@ -1,6 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { registerSuccess, registerFail, loadUser, loadUserFail } from '../actions/AuthAction';
-import { registerAuth, loadUserAuth } from '../services/AuthService'
+import { registerSuccess, registerFail, loadUser, loadUserFail } from '../../actions/AuthAction';
+import { registerAuth, loadUserAuth } from '../../services/AuthService'
 
 function* register(request) {
     try {
@@ -18,8 +18,8 @@ function* register(request) {
         console.log(error);
     }
 }
-export function* registerSaga(){
+export function* registerSaga() {
     yield all([
-        takeEvery('REGISTER_REQUEST',register)
+        takeEvery('REGISTER_REQUEST', register)
     ])
 }

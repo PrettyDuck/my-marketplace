@@ -65,20 +65,20 @@ const Register = (props) => {
                     <form className='card-funct-form' onSubmit={onSubmit}>
                         <div className='form-group'>
                             <label htmlFor='email'>Email</label><br />
-                            <input type='email' name='email' placeholder='Example@gmail.com' onChange={onChange} value={email} />
+                            <input type='email' name='email' className='primary-input' placeholder='Example@gmail.com' value={email} onChange={onChange} />
                         </div>
                         <div className='form-group'>
                             <label htmlFor='name'>Full Name</label><br />
-                            <input type='text' name='name' placeholder='Tony Stark' value={name} onChange={onChange} />
+                            <input type='text' name='name' className='primary-input' placeholder='Tony Stark' value={name} onChange={onChange} />
                         </div>
                         <div className='form-group'>
                             <label htmlFor='password'>Password</label><br />
-                            <input type='password' name='password' onChange={onChange} value={password} />
+                            <input type='password' name='password' className='primary-input' value={password} onChange={onChange} />
                             <img src={showPassIcon} alt='show-password' className='show-password' onClick={showHidePassword} />
                         </div>
                         <div className='form-group'>
                             <label htmlFor='password'>Password Again</label><br />
-                            <input type='password' name='secondPassword' onChange={onChange} />
+                            <input type='password' name='secondPassword' className='primary-input' value={secondPassword} onChange={onChange} />
                             <img src={showPassIcon} alt='show-password' className='show-password' onClick={showHidePassword} />
                         </div>
                         <input type='submit' value='Register' className='card-submit-button' />

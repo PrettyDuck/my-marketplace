@@ -1,13 +1,9 @@
-import { ALERT_REQUEST, SET_ALERT, REMOVE_ALERT } from '../actions/types';
+import { SET_ALERT, REMOVE_ALERT } from '../actions/types';
 const initialState = {
     alertsArray: []
 };
 export default (state = initialState, action) => {
     switch (action.type) {
-        case ALERT_REQUEST:
-            return {
-                ...state
-            }
         case SET_ALERT:
             return {
                 ...state,
