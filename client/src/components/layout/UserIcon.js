@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 const UserIcon = (props) => {
-    const { auth: { user }, color } = props;
+    const { auth: { user }, color, iconWrapperStyle} = props;
 
     const logedIconStyle = {
         borderRadius: '50%',
@@ -23,7 +23,7 @@ const UserIcon = (props) => {
         }
     }
     return (
-        <li style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <li style={iconWrapperStyle}>
             <span style={logedIconStyle} onClick={() => {
                 document.querySelector('.user-interface-card').style.visibility = 'visible'
             }}>{getAbbr()}</span>

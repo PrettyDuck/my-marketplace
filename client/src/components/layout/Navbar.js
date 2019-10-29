@@ -21,9 +21,14 @@ const Navbar = (props) => {
     // Color for our icon
     const colorForIcon = Math.round(Math.random() * 345);
     // 
+    const iconWrapperStyle = {
+        display: 'flex', 
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
     const authLinks = (
         <Fragment>
-            <UserIcon color={`hsl(${colorForIcon}, 100%, 70%)`} />
+            <UserIcon color={`hsl(${colorForIcon}, 100%, 70%)`} iconWrapperStyle={iconWrapperStyle} />
         </Fragment>
     )
     const SearchForm = (

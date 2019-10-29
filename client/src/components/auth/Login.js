@@ -15,7 +15,7 @@ const Login = (props) => {
         if (isAuthenticated) {
             props.history.push('/');
         }
-        if (error === 'Ivalid Credentials') {
+        if (error === 'Invalid Credentials') {
             console.error(error);
             if (alertsArray.length === 0) {
                 alertRequest(error);
@@ -66,7 +66,7 @@ const Login = (props) => {
                         <input type='submit' value='Continue' className='card-submit-button' />
                     </form>
                 </div>
-                <Alerts />
+                <Alerts  classNameForAlertStyling={'card auth-card redirect-card'}/>
                 <div className='card auth-card redirect-card'>
                     <span>I have no account,</span><Link to='/register' className='redirect-label'>Register now</Link>
                 </div>

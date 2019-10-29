@@ -73,18 +73,18 @@ const Register = (props) => {
                         </div>
                         <div className='form-group'>
                             <label htmlFor='password'>Password</label><br />
-                            <input type='password' name='password' className='primary-input' value={password} onChange={onChange} />
+                            <input type='password' name='password' className='primary-input' value={password} onChange={onChange} minLength={6}/>
                             <img src={showPassIcon} alt='show-password' className='show-password' onClick={showHidePassword} />
                         </div>
                         <div className='form-group'>
                             <label htmlFor='password'>Password Again</label><br />
-                            <input type='password' name='secondPassword' className='primary-input' value={secondPassword} onChange={onChange} />
+                            <input type='password' name='secondPassword' className='primary-input' value={secondPassword} onChange={onChange}  minLength={6} />
                             <img src={showPassIcon} alt='show-password' className='show-password' onClick={showHidePassword} />
                         </div>
                         <input type='submit' value='Register' className='card-submit-button' />
                     </form>
                 </div>
-                <Alerts />
+                <Alerts classNameForAlertStyling={'card auth-card redirect-card'}/>
                 <div className='card auth-card redirect-card'>
                     <span>I already have an account,</span><Link to='/login' className='redirect-label'>Log in</Link>
                 </div>

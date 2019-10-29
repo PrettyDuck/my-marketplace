@@ -19,7 +19,7 @@ export const registerSuccess = data => {
 export const registerFail = error => {
     return {
         type: REGISTER_FAIL,
-        payload: error
+        payload: error.response.data.msg
     };
 };
 export const loginRequest = formData => {
@@ -37,7 +37,7 @@ export const loginSuccess = data => {
 export const loginFail = error => {
     return {
         type: LOGIN_FAIL,
-        payload: error
+        payload: error.response.data.msg
     };
 };
 export const logout = () => {

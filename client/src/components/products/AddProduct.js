@@ -4,9 +4,11 @@ import crossHorizontal from '../../res/cross/cross-horizontal.svg'
 import crossVertical from '../../res/cross/cross-vertical.svg'
 import { connect } from 'react-redux'
 import { addProductRequest } from '../../store/actions/ProductAction'
+import { alertRequest } from '../../store/actions/AlertAction'
+import Alerts from '../layout/Alerts'
 
 const AddProduct = (props) => {
-    const { addProductRequest } = props;
+    const { addProductRequest, alerts: { alertsArray }, alertRequest } = props;
     const [product, setProduct] = useState({
         name: '',
         location: '',
@@ -18,8 +20,16 @@ const AddProduct = (props) => {
     const onChange = e => setProduct({ ...product, [e.target.name]: e.target.value })
     const onSubmit = e => {
         e.preventDefault();
-        addProductRequest(product);
-        props.history.push('/');
+        if (name === '' || location === '' || description === '' || category === '' || price === '') {
+            console.log('Please fill all products fields');
+            if (alertsArray.length === 0) {
+                alertRequest('Please fill all fields');
+            }
+        }
+        else {
+            addProductRequest(product);
+            props.history.push('/');
+        }
     }
     const AddPhoto = e => {
         e.preventDefault();
@@ -53,6 +63,7 @@ const AddProduct = (props) => {
                                 <option value="Clothing &amp; Accessories">Clothing &amp; Accessories</option>
                                 <option value="Entertainment">Entertainment</option>
                                 <option value="Vehicles" >Vehicles</option>
+                                <option value="Others" >Others</option>
                             </select>
                         </div>
                         <div className='form-group small'>
@@ -71,6 +82,9 @@ const AddProduct = (props) => {
                             <label htmlFor='price'>Price</label><br />
                             <input type='number' name='price' className='primary-input' placeholder='For example: 1000$' value={price} onChange={onChange} />
                         </div>
+                        <div className='form-group small'>
+                        <Alerts/>
+                        </div>
                         <input type='submit' value='Add Product' className='card-submit-button small' />
                     </form>
                 </div>
@@ -80,6 +94,7 @@ const AddProduct = (props) => {
 }
 const mapStateToProps = state => ({
     products: state.products,
+    alerts: state.alertsReducer
 })
 
-export default connect(mapStateToProps, { addProductRequest })(AddProduct)
+export default connect(mapStateToProps, { addProductRequest, alertRequest })(AddProduct)

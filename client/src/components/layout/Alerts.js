@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
-const Alerts = ({ alerts }) => {
+const Alerts = (props) => 
+{
+    const { alerts, classNameForAlertStyling} = props;
     return (
         alerts.alertsArray.length > 0 && alerts.alertsArray.map((alert) => (
-            <div key={alert.id} className='card auth-card redirect-card'>
+            <div key={alert.id} className={classNameForAlertStyling}>
                 <FontAwesomeIcon icon={faExclamationTriangle} />{alert.msg}
             </div>
         ))

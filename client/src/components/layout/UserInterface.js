@@ -12,9 +12,11 @@ const UserInterface = ({ auth: { user }, logout, color }) => {
     const buttonStyling = {
         border: 'none',
         background: 'none',
-        color: 'inherit',
         cursor: 'pointer',
-        outline: 'inherit'
+        outline: 'inherit',
+        color: '#349a89',
+        textTransform: 'uppercase',
+        fontWeight: 'bold'
     }
     return (
         <OutsideClickHandler
@@ -25,8 +27,15 @@ const UserInterface = ({ auth: { user }, logout, color }) => {
             }}>
             <div className='user-interface-card'>
                 <ul className='user-interface-items'>
-                    <UserIcon color={color} />
-                    {user !== null ? `${user.name} ${user.email}` : null}
+                    <div className='user-interface-log'>
+                        <UserIcon color={color} />
+                        <ul>
+                            {user !== null ? [
+                                <li style={{color:'#000000',fontSize:'12px',lineHeight:'20px'}} key='1'>{`${user.name}`}</li>,
+                                <li  style={{color:'#979797',fontSize:'12px',lineHeight:'20px'}} key='2'>{`${user.email}`}</li> ] : null}
+                            <li><button className='interface-profile-btn'>Profile</button></li>
+                        </ul>
+                    </div>
                     <li className='user-interface-button' style={{ borderBottom: '1px solid #E4E4E4' }}>
                         <button style={buttonStyling} >Edit Profile</button>
                     </li>

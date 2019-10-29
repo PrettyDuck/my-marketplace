@@ -1,7 +1,7 @@
 import { ADD_PRODUCT, GET_PRODUCTS, PRODUCT_ERROR, storedState } from '../actions/types';
 const initialState = storedState !== null ? storedState.products : {
     products: null,
-    error: null
+    productError: null
 };
 
 export default (state = initialState, action) => {
@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
         case PRODUCT_ERROR:
             return {
                 ...state,
-                error: action.payload
+                productError: action.payload
             }
         default: return state;
     }
