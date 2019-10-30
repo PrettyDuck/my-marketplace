@@ -1,6 +1,7 @@
-import { ADD_PRODUCT, GET_PRODUCTS, PRODUCT_ERROR, storedState } from '../actions/types';
+import { ADD_PRODUCT, GET_PRODUCTS, PRODUCT_ERROR,GET_SINGLE_PRODUCT, storedState } from '../actions/types';
 const initialState = storedState !== null ? storedState.products : {
     products: null,
+    currentProduct: null,
     productError: null
 };
 
@@ -10,6 +11,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 products: action.payload
+            }
+        case GET_SINGLE_PRODUCT:
+            return{
+                ...state,
+                currentProduct: action.payload
             }
         case ADD_PRODUCT:
             return {

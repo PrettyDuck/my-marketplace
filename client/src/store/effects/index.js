@@ -1,18 +1,14 @@
 import { all, fork } from 'redux-saga/effects';
-import { loginSaga } from './auth/LoginEffect';
-import { registerSaga } from './auth/RegisterEffect';
-import { alertSaga } from './alerts/AlertEffect';
-import { getProductsSaga } from './products/GetProductsEffect';
-import { addProductSaga } from './products/AddProductEffect';
+import { usersSaga } from './UsersEffects';
+import { alertsSaga } from './AlertsEffects';
+import { productsSaga } from './ProductsEffects';
 import { statePersistSaga } from './StatePersistEffect';
 
 export default function* rootSaga() {
     yield all([
-        fork(alertSaga),
-        fork(registerSaga),
-        fork(loginSaga),
-        fork(getProductsSaga),
-        fork(addProductSaga),
+        fork(alertsSaga),
+        fork(usersSaga),
+        fork(productsSaga),
         fork(statePersistSaga)
     ]);
 }

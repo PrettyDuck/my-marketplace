@@ -1,5 +1,5 @@
 import { all, put, takeEvery } from 'redux-saga/effects';
-import { setAlert, removeAlert } from '../../actions/AlertAction';
+import { setAlert, removeAlert } from '../actions/AlertAction';
 
 const delay = (timeout) => new Promise(res => setTimeout(res, timeout));
 function* alert(request) {
@@ -7,7 +7,7 @@ function* alert(request) {
     yield delay(5000);
     yield put(removeAlert());
 }
-export function* alertSaga() {
+export function* alertsSaga() {
     yield all([
         takeEvery('ALERT_REQUEST', alert)
     ])

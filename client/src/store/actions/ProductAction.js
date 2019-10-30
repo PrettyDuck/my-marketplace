@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_REQUEST, ADD_PRODUCT, GET_PRODUCTS, GET_PRODUCTS_REQUEST, PRODUCT_ERROR } from './types';
+import { ADD_PRODUCT_REQUEST, ADD_PRODUCT, GET_PRODUCTS, GET_PRODUCTS_REQUEST, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT, PRODUCT_ERROR } from './types';
 
 export const getProductsRequest = () => {
     return {
@@ -8,6 +8,18 @@ export const getProductsRequest = () => {
 export const getProductsSuccess = data => {
     return {
         type: GET_PRODUCTS,
+        payload: data
+    }
+}
+export const getSingleProductRequest = id => {
+    return {
+        type: GET_SINGLE_PRODUCT_REQUEST,
+        payload: id
+    }
+}
+export const getSingleProductSuccess = data => {
+    return {
+        type: GET_SINGLE_PRODUCT,
         payload: data
     }
 }

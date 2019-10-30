@@ -5,7 +5,7 @@ const { check, validationResult } = require('express-validator');
 const Product = require('../models/Product');
 
 // @route GET api/products
-// @desc Get all user products
+// @desc Get all users products
 // @access Private
 
 router.get('/', auth, async (req, res) => {
@@ -25,6 +25,22 @@ router.get('/', auth, async (req, res) => {
 
 });
 
+// @route GET api/products/:id
+// @desc Get product by id
+// @access Private
+
+router.get('/:id', auth, async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) return res.status(404).json({ msg: 'Product not found' });
+        res.json(product);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+
+});
+
 // @route POST api/products
 // @desc Add new user product
 // @access Private
@@ -32,8 +48,8 @@ router.get('/', auth, async (req, res) => {
 router.post('/', [auth, [
     check('name', 'Name is required').not().isEmpty(),
     check('description', 'Description is required').not().isEmpty(),
-    check('location','Location is required').not().isEmpty(),
-    check('category','Category is required').not().isEmpty(),
+    check('location', 'Location is required').not().isEmpty(),
+    check('category', 'Category is required').not().isEmpty(),
     check('price', 'Price is required').not().isEmpty()
 ]], async (req, res) => // using auth for a private route and express-validator as a second for checking  
 {

@@ -11,9 +11,11 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const ALERT_REQUEST = 'ALERT_REQUEST'
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
-export const storedState = window.localStorage.getItem('persisted-state')!== 'undefined' ? JSON.parse(window.localStorage.getItem('persisted-state')) : null;
+export const storedState = window.localStorage.getItem('persisted-state') !== 'undefined' ? JSON.parse(window.localStorage.getItem('persisted-state')) : null;
 export const ADD_PRODUCT_REQUEST = 'ADD_PRODUCT_REQUEST';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const GET_PRODUCTS_REQUEST = 'GET_PRODUCTS_REQUEST';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const GET_SINGLE_PRODUCT_REQUEST = 'GET_SINGLE_PRODUCT_REQUEST';
+export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT';
 export const PRODUCT_ERROR = 'PRODUCT_ERROR';

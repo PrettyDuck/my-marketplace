@@ -5,6 +5,7 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Home from './components/pages/Home'
 import AddProduct from './components/products/AddProduct'
+import Product from './components/products/Product'
 import Policy from './components/pages/Policy'
 import { Provider } from 'react-redux';
 import store from './store/store';
@@ -25,6 +26,7 @@ const App = () => {
             <PrivateRoute exact path='/' component={Home} />
             <PrivateRoute exact path='/sell' component={AddProduct}></PrivateRoute>
             <PrivateRoute exact path='/policy' component={Policy}></PrivateRoute>
+            <PrivateRoute exact path='/products/:id' component={Product}></PrivateRoute>
           </Switch>
         </div>
       </BrowserRouter>
