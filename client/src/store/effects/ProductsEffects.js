@@ -21,7 +21,9 @@ function* getSingleProduct(request) {
 }
 function* addProduct(request) {
     try {
+        console.log(request.payload);
         const data = yield call(addProductReq, request.payload);
+        console.log(data);
         yield put(addProductSuccess(data))
     } catch (error) {
         yield put(productError(error))

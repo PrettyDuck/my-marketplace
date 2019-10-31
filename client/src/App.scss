@@ -362,7 +362,7 @@ nav {
 }
 
 .product-img {
-  width: 97%;
+  width: 95%;
   height: 150px;
   border-radius: 4px 4px 0px 0px;
   margin: 3px 3.5px 3.5px;
@@ -415,7 +415,6 @@ nav {
 .form-group .photo-field {
   height: 125px;
   padding: 0px 16px;
-  vertical-align: text-top;
 }
 
 .add-photo-btn {
@@ -426,6 +425,9 @@ nav {
   background-color: #e4e4e4;
   border: none;
   outline: none;
+}
+.add-photo-btn::-webkit-file-upload-button{
+  visibility: hidden;
 }
 
 .card-submit-button.small {

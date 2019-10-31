@@ -14,13 +14,18 @@ const AddProduct = (props) => {
         location: '',
         description: '',
         category: '',
+        productImage: '',
         price: '',
     });
-    const { name, location, description, category, price } = product;
+    const { name, location, description, category, productImage, price } = product;
     const onChange = e => setProduct({ ...product, [e.target.name]: e.target.value })
+    const onChangeProductImg = e => {
+        setProduct({ ...product, productImage: e.target.files[0] });
+        console.log(e.target.files[0])
+    };
     const onSubmit = e => {
         e.preventDefault();
-        if (name === '' || location === '' || description === '' || category === '' || price === '') {
+        if (name === '' || location === '' || description === '' || category === '' || productImage === '' || price === '') {
             console.log('Please fill all products fields');
             if (alertsArray.length === 0) {
                 alertRequest('Please fill all fields');
@@ -31,16 +36,13 @@ const AddProduct = (props) => {
             props.history.push('/');
         }
     }
-    const AddPhoto = e => {
-        e.preventDefault();
-    }
     return (
         <Fragment>
             <Navbar background={true} isOnSellingPosition={true} />
             <div className='content-wrapper'>
                 <div className='card add-product-card'>
                     <div className='card-label'>Add Product</div>
-                    <form className='card-funct-form' onSubmit={onSubmit}>
+                    <form className='card-funct-form' onSubmit={onSubmit} encType=''>
                         <div className='form-group small'>
                             <label htmlFor='name'>Title</label><br />
                             <input type='text' name='name' className='primary-input' placeholder='For example: Iron man suit' value={name} onChange={onChange} />
@@ -69,13 +71,11 @@ const AddProduct = (props) => {
                         <div className='form-group small'>
                             <label htmlFor='title'>Photos</label><br />
                             <div className='photo-field'>
-                                <button className='add-photo-btn' style={{
+                                <input type='file' name='productImage' onChange={onChangeProductImg} className='add-photo-btn' style={{
                                     backgroundImage: `url(${crossHorizontal}),url(${crossVertical})`,
                                     backgroundPosition: 'center center,center center',
                                     backgroundRepeat: 'no-repeat,no-repeat'
-                                }} onClick={AddPhoto}>
-
-                                </button>
+                                }} multiple />
                             </div>
                         </div>
                         <div className='form-group small'>
@@ -83,7 +83,7 @@ const AddProduct = (props) => {
                             <input type='number' name='price' className='primary-input' placeholder='For example: 1000$' value={price} onChange={onChange} />
                         </div>
                         <div className='form-group small'>
-                        <Alerts/>
+                            <Alerts />
                         </div>
                         <input type='submit' value='Add Product' className='card-submit-button small' />
                     </form>

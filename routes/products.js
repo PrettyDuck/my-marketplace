@@ -3,6 +3,32 @@ const router = express.Router();
 const auth = require('../middleware/auth')
 const { check, validationResult } = require('express-validator');
 const Product = require('../models/Product');
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + file.originalname);
+        // file.filename - return generated filename
+    }
+});
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') // I want to store that file
+    {
+        cb(null, true); // 1 - param - error, 2 - bool
+    }
+    else {  // I don't want to store that file
+        cb(null, false);
+    }
+}
+const upload = multer({
+    storage: storage, limits: {
+        fileSize: 1024 * 1024 * 16
+    },
+    fileFilter: fileFilter
+})
 
 // @route GET api/products
 // @desc Get all users products
@@ -45,14 +71,17 @@ router.get('/:id', auth, async (req, res) => {
 // @desc Add new user product
 // @access Private
 
-router.post('/', [auth, [
+router.post('/', upload.single('productImage'), [auth, [
     check('name', 'Name is required').not().isEmpty(),
-    check('description', 'Description is required').not().isEmpty(),
     check('location', 'Location is required').not().isEmpty(),
+    check('description', 'Description is required').not().isEmpty(),
     check('category', 'Category is required').not().isEmpty(),
     check('price', 'Price is required').not().isEmpty()
 ]], async (req, res) => // using auth for a private route and express-validator as a second for checking  
 {
+    // console.log(req);
+    // console.log(req.body);
+    // console.log(req.file);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({
@@ -66,6 +95,7 @@ router.post('/', [auth, [
             location,
             description,
             category,
+            productImage: req.file.path,
             price,
             user: req.user.id
         });
