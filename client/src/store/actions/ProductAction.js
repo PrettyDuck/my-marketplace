@@ -1,4 +1,8 @@
-import { ADD_PRODUCT_REQUEST, ADD_PRODUCT, GET_PRODUCTS, GET_PRODUCTS_REQUEST, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT, PRODUCT_ERROR } from './types';
+import {
+    ADD_PRODUCT_REQUEST, ADD_PRODUCT, GET_PRODUCTS, GET_PRODUCTS_REQUEST,
+    GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT, PRODUCT_ERROR,
+    DELETE_PRODUCT_REQUEST, DELETE_PRODUCT
+} from './types';
 
 export const getProductsRequest = () => {
     return {
@@ -33,6 +37,18 @@ export const addProductSuccess = formData => {
     return {
         type: ADD_PRODUCT,
         payload: formData
+    }
+}
+export const deleteProductRequest = data => {
+    return {
+        type: DELETE_PRODUCT_REQUEST,
+        payload: data
+    }
+}
+export const deleteProductSuccess = id => {
+    return {
+        type: DELETE_PRODUCT,
+        payload: id
     }
 }
 export const productError = error => {

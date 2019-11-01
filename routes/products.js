@@ -3,7 +3,8 @@ const router = express.Router();
 const auth = require('../middleware/auth')
 const { check, validationResult } = require('express-validator');
 const Product = require('../models/Product');
-const multer = require('multer')
+const fs = require('fs');
+const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -144,6 +145,10 @@ router.put('/:id', auth, async (req, res) => {
 
 router.delete('/:id', auth, async (req, res) => {
     try {
+        fs.unlink(req.body.productImage,(msg) =>{
+            if(msg) throw msg;
+            console.log('Photo deleted');
+        })  // Deleting photo of our product from storage 
         let product = await Product.findById(req.params.id);
         if (!product) return res.status(404).json({ msg: 'Product not found' });
 

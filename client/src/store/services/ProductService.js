@@ -27,3 +27,6 @@ export const addProductReq = async formData => {
     const res = await axios.post('/api/products', fd, config);
     return res.data;
 }
+export const deleteProductReq = async formData => {
+    await axios.delete(`/api/products/${formData.id}`,{data: { productImage: formData.productImage }}); // data - for deleting image from storage
+}
