@@ -1,27 +1,33 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState,useEffect } from 'react'
+import {connect} from 'react-redux'
 import Navbar from '../layout/Navbar'
+import Alerts from '../layout/Alerts'
 import crossHorizontal from '../../res/cross/cross-horizontal.svg'
 import crossVertical from '../../res/cross/cross-vertical.svg'
-import { connect } from 'react-redux'
-import { addProductRequest } from '../../store/actions/ProductAction'
 import { alertRequest } from '../../store/actions/AlertAction'
-import Alerts from '../layout/Alerts'
+import { updateProductRequest } from '../../store/actions/ProductAction'
 
-const AddProduct = (props) => {
-    const { addProductRequest, alerts: { alertsArray }, alertRequest } = props;
+const UpdateProduct = (props) => {
+    const { products:{currentProduct} ,alerts: { alertsArray }, alertRequest,updateProductRequest } = props;
     const [product, setProduct] = useState({
-        name: '',
-        location: '',
-        description: '',
+        name:'',
+        location:'',
+        description:'',
         category: '',
-        productImage: '',
-        price: '',
+        productImage:'',
+        price: ''
     });
+    useEffect(()=>{
+        if(currentProduct!==null){
+            setProduct(currentProduct);
+        }
+    },[currentProduct])
+    console.log(product);
     const { name, location, description, category, productImage, price } = product;
     const onChange = e => setProduct({ ...product, [e.target.name]: e.target.value })
     const onChangeProductImg = e => {
         setProduct({ ...product, productImage: e.target.files[0] });
-        alertRequest('File added');
+        console.log(e.target.files[0])
     };
     const onSubmit = e => {
         e.preventDefault();
@@ -32,7 +38,9 @@ const AddProduct = (props) => {
             }
         }
         else {
-            addProductRequest(product);
+            product.oldImage = currentProduct.productImage; // adding hew field for further deleting our old image
+            console.log(product);
+            updateProductRequest(product);
             props.history.push('/');
         }
     }
@@ -41,7 +49,7 @@ const AddProduct = (props) => {
             <Navbar background={true} isOnSellingPosition={true} />
             <div className='content-wrapper'>
                 <div className='card add-product-card'>
-                    <div className='card-label'>Add Product</div>
+                    <div className='card-label'>Edit Product</div>
                     <form className='card-funct-form' onSubmit={onSubmit}>
                         <div className='form-group small'>
                             <label htmlFor='name'>Title</label><br />
@@ -85,7 +93,7 @@ const AddProduct = (props) => {
                         <div className='form-group small'>
                             <Alerts />
                         </div>
-                        <input type='submit' value='Add Product' className='card-submit-button small' />
+                        <input type='submit' value='Update Product' className='card-submit-button small' />
                     </form>
                 </div>
             </div>
@@ -96,5 +104,4 @@ const mapStateToProps = state => ({
     products: state.products,
     alerts: state.alertsReducer
 })
-
-export default connect(mapStateToProps, { addProductRequest, alertRequest })(AddProduct)
+export default connect(mapStateToProps, { updateProductRequest, alertRequest })(UpdateProduct)

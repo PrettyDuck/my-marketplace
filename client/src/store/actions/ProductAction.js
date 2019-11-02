@@ -1,7 +1,7 @@
 import {
     ADD_PRODUCT_REQUEST, ADD_PRODUCT, GET_PRODUCTS, GET_PRODUCTS_REQUEST,
     GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT, PRODUCT_ERROR,
-    DELETE_PRODUCT_REQUEST, DELETE_PRODUCT
+    DELETE_PRODUCT_REQUEST, DELETE_PRODUCT,UPDATE_PRODUCT_REQUEST,UPDATE_PRODUCT
 } from './types';
 
 export const getProductsRequest = () => {
@@ -49,6 +49,18 @@ export const deleteProductSuccess = id => {
     return {
         type: DELETE_PRODUCT,
         payload: id
+    }
+}
+export const updateProductRequest = data => {
+    return {
+        type: UPDATE_PRODUCT_REQUEST,
+        payload: data
+    }
+}
+export const updateProductSuccess = data => {
+    return {
+        type: UPDATE_PRODUCT,
+        payload: data
     }
 }
 export const productError = error => {

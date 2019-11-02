@@ -1,6 +1,6 @@
 import { call, put, all, takeEvery } from 'redux-saga/effects'
-import { getProductsReq, getSingleProductReq, addProductReq, deleteProductReq } from '../services/ProductService'
-import { getProductsSuccess, getSingleProductSuccess, addProductSuccess, deleteProductSuccess, productError } from '../actions/ProductAction'
+import { getProductsReq, getSingleProductReq, addProductReq, deleteProductReq,updateProductReq } from '../services/ProductService'
+import { getProductsSuccess, getSingleProductSuccess, addProductSuccess, deleteProductSuccess,updateProductSuccess, productError } from '../actions/ProductAction'
 function* getProducts() {
     try {
         const data = yield call(getProductsReq);
@@ -34,7 +34,19 @@ function* deleteProduct(request) {
     try {
         console.log(request);
         yield call(deleteProductReq, request.payload);
-        yield put(deleteProductSuccess(request));
+        yield put(deleteProductSuccess(request.payload.id));
+    } catch (error) {
+        yield put(productError(error));
+        console.log(error);
+    }
+}
+function* updateProduct(request)
+{
+    try {
+        console.log(request);
+        const data = yield call(updateProductReq, request.payload);
+        console.log(data);
+        yield put(updateProductSuccess(data))    
     } catch (error) {
         yield put(productError(error));
         console.log(error);
@@ -45,6 +57,7 @@ export function* productsSaga() {
         takeEvery('GET_PRODUCTS_REQUEST', getProducts),
         takeEvery('GET_SINGLE_PRODUCT_REQUEST', getSingleProduct),
         takeEvery('ADD_PRODUCT_REQUEST', addProduct),
-        takeEvery('DELETE_PRODUCT_REQUEST', deleteProduct)
+        takeEvery('DELETE_PRODUCT_REQUEST', deleteProduct),
+        takeEvery('UPDATE_PRODUCT_REQUEST',updateProduct)
     ])
 }
