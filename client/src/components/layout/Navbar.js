@@ -4,12 +4,13 @@ import LogoBlack from '../../res/logo-black.svg'
 import LogoWhite from '../../res/logo-white.svg'
 import FavoritesBlack from '../../res/favorites-black.svg'
 import FavoritesWhite from '../../res/favorites-white.svg'
+import FavoritesFilled from '../../res/favorites-filled.svg'
 import { connect } from 'react-redux'
 import UserInterface from './UserInterface'
 import UserIcon from './UserIcon'
 
 const Navbar = (props) => {
-    const { auth: { isAuthenticated }, background, extendedBackground, isOnSellingPosition } = props
+    const { auth: { isAuthenticated }, background, extendedBackground, isOnSellingPosition,isOnFavoritesPosition } = props
 
     const guestLinks = (
         <Fragment>
@@ -22,7 +23,7 @@ const Navbar = (props) => {
     const colorForIcon = Math.round(Math.random() * 345);
     // 
     const iconWrapperStyle = {
-        display: 'flex', 
+        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     }
@@ -53,7 +54,7 @@ const Navbar = (props) => {
                             <Link to='/login' style={{ color: '#2B2B2B' }}>Login</Link>
                         </li>
                         <li>
-                            <Link to='/'><img src={FavoritesBlack} alt='Favorites' className='favorites' /></Link>
+                            <Link to='/favorites'><img src={FavoritesBlack} alt='Favorites' /></Link>
                         </li>
                     </ul>
                 </div>
@@ -72,9 +73,13 @@ const Navbar = (props) => {
                             </li>
                         }
                         {isAuthenticated ? authLinks : guestLinks}
-                        <li>
-                            <Link to='/'><img src={FavoritesWhite} alt='Favorites' className='favorites' /></Link>
-                        </li>
+                        {isOnFavoritesPosition ?
+                            <li>
+                                <Link to='/favorites'><img src={FavoritesFilled} alt='Favorites' /></Link>
+                            </li> :
+                            <li>
+                                <Link to='/favorites'><img src={FavoritesWhite} alt='Favorites' /></Link>
+                            </li>}
                     </ul>
                 </div>
                 {/*  //if extendedBackground equal true - SearchForm, false - null  */}

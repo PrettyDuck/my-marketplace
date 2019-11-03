@@ -28,9 +28,9 @@ export const addProductReq = async formData => {
     return res.data;
 }
 export const deleteProductReq = async formData => {
-    await axios.delete(`/api/products/${formData.id}`,{data: { productImage: formData.productImage }}); // data - for deleting image from storage
+    await axios.delete(`/api/products/${formData.id}`, { data: { productImage: formData.productImage } }); // data - for deleting image from storage
 }
-export const updateProductReq = async formData =>{
+export const updateProductReq = async formData => {
     console.log(formData);
     const fd = new FormData();
     fd.append('name', formData.name);
@@ -39,14 +39,13 @@ export const updateProductReq = async formData =>{
     fd.append('category', formData.category);
     fd.append('productImage', formData.productImage);
     fd.append('price', formData.price);
-    fd.append('oldImage',formData.oldImage);
+    fd.append('oldImage', formData.oldImage);
 
     const config = {
         headers: {
             'Content-Type': 'multipart/form-data'
-            //'Content-Type': 'application/json'
         }
     }
-    const res = await axios.put(`/api/products/${formData._id}`,fd,config);
+    const res = await axios.put(`/api/products/${formData._id}`, fd, config);
     return res.data;
 }

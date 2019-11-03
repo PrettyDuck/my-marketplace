@@ -22,7 +22,6 @@ const UpdateProduct = (props) => {
             setProduct(currentProduct);
         }
     },[currentProduct])
-    console.log(product);
     const { name, location, description, category, productImage, price } = product;
     const onChange = e => setProduct({ ...product, [e.target.name]: e.target.value })
     const onChangeProductImg = e => {
@@ -41,7 +40,6 @@ const UpdateProduct = (props) => {
             product.oldImage = currentProduct.productImage; // adding hew field for further deleting our old image
             console.log(product);
             updateProductRequest(product);
-            props.history.push('/');
         }
     }
     return (
@@ -83,7 +81,7 @@ const UpdateProduct = (props) => {
                                     backgroundImage: `url(${crossHorizontal}),url(${crossVertical})`,
                                     backgroundPosition: 'center center,center center',
                                     backgroundRepeat: 'no-repeat,no-repeat'
-                                }} multiple />
+                                }} />
                             </div>
                         </div>
                         <div className='form-group small'>

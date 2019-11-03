@@ -324,15 +324,15 @@ nav {
   flex-direction: column;
   justify-content: space-around;
 }
-.user-interface-log{
+.user-interface-log {
   display: flex;
   justify-content: space-evenly;
 }
-.interface-profile-btn{
+.interface-profile-btn {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border:none;
+  border: none;
   background: inherit;
   color: $secondary-color;
   font-weight: bold;
@@ -348,8 +348,8 @@ nav {
 
 .products-wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 24%);
-  grid-column-gap: 7px;
+  grid-template-columns: repeat(4, 24.5%);
+  grid-column-gap: 6px;
   grid-row-gap: 14px;
 }
 
@@ -358,14 +358,16 @@ nav {
   border: 1px solid #e4e4e4;
   box-shadow: 0px 4px 14px rgba(121, 121, 121, 0.0527344);
   border-radius: 4px;
-  height: 100%;
+  position: relative;
 }
 
 .product-img {
-  width: 95%;
   height: 150px;
   border-radius: 4px 4px 0px 0px;
-  margin: 3px 3.5px 3.5px;
+  width: 100%;
+}
+.product-img-container {
+  padding: 3px 3.5px 0;
 }
 
 .product-name,
@@ -375,15 +377,26 @@ nav {
 }
 
 .product-name {
-  height: 8%;
   font-size: 15px;
   overflow: hidden;
 }
 
 .product-price {
-  height: 10%;
   font-weight: bold;
   font-size: 18px;
+}
+.fav-container {
+  position: absolute;
+  right: 5px;
+  bottom: 30px;
+  height: 30px;
+  width: 30px;
+  background-color: $primary-color;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.163407);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 // Add Product
@@ -426,7 +439,7 @@ nav {
   border: none;
   outline: none;
 }
-.add-photo-btn::-webkit-file-upload-button{
+.add-photo-btn::-webkit-file-upload-button {
   visibility: hidden;
 }
 

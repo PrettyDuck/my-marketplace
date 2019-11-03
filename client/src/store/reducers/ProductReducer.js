@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, GET_PRODUCTS, PRODUCT_ERROR,GET_SINGLE_PRODUCT,DELETE_PRODUCT, storedState } from '../actions/types';
+import { ADD_PRODUCT, GET_PRODUCTS, PRODUCT_ERROR, GET_SINGLE_PRODUCT, DELETE_PRODUCT, storedState, UPDATE_PRODUCT } from '../actions/types';
 const initialState = storedState !== null ? storedState.products : {
     products: null,
     currentProduct: null,
@@ -11,10 +11,10 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 currentProduct: null,
-                products: action.payload
+                products: action.payload,
             }
         case GET_SINGLE_PRODUCT:
-            return{
+            return {
                 ...state,
                 currentProduct: action.payload
             }
@@ -24,10 +24,15 @@ export default (state = initialState, action) => {
                 products: [action.payload, ...state.products]
             }
         case DELETE_PRODUCT:
-            return{
+            return {
                 ...state,
                 currentProduct: null,
-                products: state.products.filter(product => product.id !== action.payload)
+                products: state.products.filter(product => product.id !== action.payload),
+            }
+        case UPDATE_PRODUCT:
+            return{
+                ...state,
+                currentProduct: null
             }
         case PRODUCT_ERROR:
             return {

@@ -1,17 +1,19 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Router, Switch, Route } from 'react-router-dom';
 import './App.scss';
-import Login from './components/auth/Login'
-import Register from './components/auth/Register'
-import Home from './components/pages/Home'
-import AddProduct from './components/products/AddProduct'
-import Product from './components/products/Product'
-import Policy from './components/pages/Policy'
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Home from './components/pages/Home';
+import AddProduct from './components/products/AddProduct';
+import Product from './components/products/Product';
+import Policy from './components/pages/Policy';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import SetAuthToken from '../src/utils/SetAuthToken'
-import PrivateRoute from '../src/components/routing/PrivateRoute'
-import UpdateProduct from './components/products/UpdateProduct'
+import SetAuthToken from '../src/utils/SetAuthToken';
+import PrivateRoute from '../src/components/routing/PrivateRoute';
+import UpdateProduct from './components/products/UpdateProduct';
+import history from './history';
+import Favorites from './components/products/Favorites'
 
 if (localStorage.token) {
   SetAuthToken(localStorage.token);
@@ -19,7 +21,7 @@ if (localStorage.token) {
 const App = () => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <Router history={history}>
         <div className='main'>
           <Switch>
             <Route exact path='/login' component={Login}></Route>
@@ -29,9 +31,10 @@ const App = () => {
             <PrivateRoute exact path='/update' component={UpdateProduct}></PrivateRoute>
             <PrivateRoute exact path='/policy' component={Policy}></PrivateRoute>
             <PrivateRoute exact path='/products/:id' component={Product}></PrivateRoute>
+            <PrivateRoute exact path='/favorites' component={Favorites}></PrivateRoute>
           </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     </Provider>
   );
 }

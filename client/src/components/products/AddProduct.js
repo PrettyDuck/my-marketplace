@@ -33,7 +33,6 @@ const AddProduct = (props) => {
         }
         else {
             addProductRequest(product);
-            props.history.push('/');
         }
     }
     return (
@@ -75,7 +74,7 @@ const AddProduct = (props) => {
                                     backgroundImage: `url(${crossHorizontal}),url(${crossVertical})`,
                                     backgroundPosition: 'center center,center center',
                                     backgroundRepeat: 'no-repeat,no-repeat'
-                                }} multiple />
+                                }} />
                             </div>
                         </div>
                         <div className='form-group small'>

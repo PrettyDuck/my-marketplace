@@ -7,5 +7,5 @@ import ProductReducer from './ProductReducer'
 export default combineReducers({
     auth: AuthReducer,
     alertsReducer: AlertReducer,
-    products: ProductReducer
+    products: ProductReducer,
 });
