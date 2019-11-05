@@ -26,6 +26,7 @@ const UpdateProduct = (props) => {
     const onChange = e => setProduct({ ...product, [e.target.name]: e.target.value })
     const onChangeProductImg = e => {
         setProduct({ ...product, productImage: e.target.files[0] });
+        alertRequest('File added');
         console.log(e.target.files[0])
     };
     const onSubmit = e => {

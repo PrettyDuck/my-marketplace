@@ -5,8 +5,7 @@ import ShapeColor from '../../res/shape-color.svg'
 
 const ProductItem = ({ product }) => {
     const { name, price, productImage } = product;
-
-    //Getting favorites from LocalStorage
+    // Set special style for favorites products
     let products;
     if (localStorage.getItem('products') === null) {
         products = [];
@@ -14,27 +13,38 @@ const ProductItem = ({ product }) => {
     else {
         products = JSON.parse(localStorage.getItem('products'));
     }
-    const pos = products.map(function (e) { return e._id; }).indexOf(product._id) // getting position of element where id equal id of our product
     let favButtonStyle;
-    if (pos !== -1) // if localStorage contain out item 
+    const index = products.findIndex(item=> item._id === product._id); // getting position of element where id equal id of our product
+    if (index !== -1) // if localStorage contain out item 
     {
         favButtonStyle = `url(${ShapeColor})`;
     }
     else {
         favButtonStyle = `url(${Shape})`;
     }
+    
     const [favorite, setFavorite] = useState(favButtonStyle);
-    const setFavoriteItem = e => {
+    
+    const setFavoriteItem = e => 
+    {
         e.preventDefault();
+        let favoritesProducts;
+        if (localStorage.getItem('products') === null) {
+            favoritesProducts = [];
+        }
+        else {
+            favoritesProducts = JSON.parse(localStorage.getItem('products'));
+        }
+        const indexProduct = favoritesProducts.findIndex(item=> item._id === product._id); // getting position of element where id equal id of our product
         // If item is already in LS we need to delete it from there
-        if (pos !== -1) {
-            products.splice(products.indexOf(product), 1);
-            localStorage.setItem('products', JSON.stringify(products));
+        if (indexProduct !== -1) {
+            favoritesProducts.splice(indexProduct, 1);
+            localStorage.setItem('products', JSON.stringify(favoritesProducts));
             setFavorite(`url(${Shape})`);
         }
         else {
-            products.push(product);
-            localStorage.setItem('products', JSON.stringify(products));
+            favoritesProducts.push(product);
+            localStorage.setItem('products', JSON.stringify(favoritesProducts));
             setFavorite(`url(${ShapeColor})`);
         }
     }
@@ -48,7 +58,7 @@ const ProductItem = ({ product }) => {
                     {name}
                 </li>
                 <li className='product-price'>
-                    {price}
+                    {'$' + price}
                 </li>
             </Link>
             <li className='fav-container'>
@@ -60,9 +70,10 @@ const ProductItem = ({ product }) => {
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     backgroundImage: favorite,
+                    outline: 'none',
                 }} onClick={setFavoriteItem} ></button>
             </li>
-        </ul>
+        </ul >
     )
 }
 

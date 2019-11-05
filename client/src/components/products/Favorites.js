@@ -7,7 +7,6 @@ const Favorites = () => {
     let products;
     if (localStorage.getItem('products') === null) {
         products = [];
-        return <h4>You need to add a products to favorites to see them here</h4>
     }
     else {
         products = JSON.parse(localStorage.getItem('products'));
@@ -16,6 +15,7 @@ const Favorites = () => {
         <Fragment>
             <Navbar background={true} extendedBackground={true} isOnFavoritesPosition={true} />
             <div className='content-wrapper'>
+                <div className='favorites-label'>Saved Items <span style={{color:'rgba(43,43,43,0.5)'}}>{'(' + products.length + ')'}</span></div>
                 {products !== null ?
                     (<div className=' card-form products-wrapper' style={{ gridTemplateRows: `repeat(${Math.ceil(products.length / 4)},auto)` }}>
                         {products.map(product => (<ProductItem product={product} key={product._id} />))}
