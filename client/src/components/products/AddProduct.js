@@ -8,7 +8,7 @@ import { alertRequest } from '../../store/actions/AlertAction'
 import Alerts from '../layout/Alerts'
 
 const AddProduct = (props) => {
-    const { addProductRequest, alerts: { alertsArray }, alertRequest } = props;
+    const { addProductRequest, alerts: { alertsArray },auth:{user}, alertRequest } = props;
     const [product, setProduct] = useState({
         name: '',
         location: '',
@@ -16,6 +16,7 @@ const AddProduct = (props) => {
         category: '',
         productImage: '',
         price: '',
+        productOwner: user.name
     });
     const { name, location, description, category, productImage, price } = product;
     const onChange = e => setProduct({ ...product, [e.target.name]: e.target.value })
@@ -93,7 +94,8 @@ const AddProduct = (props) => {
 }
 const mapStateToProps = state => ({
     products: state.products,
-    alerts: state.alertsReducer
+    alerts: state.alertsReducer,
+    auth: state.auth
 })
 
 export default connect(mapStateToProps, { addProductRequest, alertRequest })(AddProduct)

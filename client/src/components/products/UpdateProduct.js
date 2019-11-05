@@ -8,14 +8,15 @@ import { alertRequest } from '../../store/actions/AlertAction'
 import { updateProductRequest } from '../../store/actions/ProductAction'
 
 const UpdateProduct = (props) => {
-    const { products:{currentProduct} ,alerts: { alertsArray }, alertRequest,updateProductRequest } = props;
+    const { products:{currentProduct},auth:{user},alerts: { alertsArray }, alertRequest,updateProductRequest } = props;
     const [product, setProduct] = useState({
         name:'',
         location:'',
         description:'',
         category: '',
         productImage:'',
-        price: ''
+        price: '',
+        productOwner: user.name
     });
     useEffect(()=>{
         if(currentProduct!==null){
@@ -101,6 +102,7 @@ const UpdateProduct = (props) => {
 }
 const mapStateToProps = state => ({
     products: state.products,
-    alerts: state.alertsReducer
+    alerts: state.alertsReducer,
+    auth: state.auth
 })
 export default connect(mapStateToProps, { updateProductRequest, alertRequest })(UpdateProduct)

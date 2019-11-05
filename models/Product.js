@@ -16,6 +16,11 @@ const ProductSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    category:
+    {
+        type: String,
+        required: true
+    },
     productImage:{
         type: String,
         required: true
@@ -24,7 +29,7 @@ const ProductSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    category:
+    productOwner:
     {
         type: String,
         required: true

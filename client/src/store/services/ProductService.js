@@ -19,6 +19,7 @@ export const addProductReq = async formData => {
     fd.append('category', formData.category);
     fd.append('productImage', formData.productImage);
     fd.append('price', formData.price);
+    fd.append('productOwner',formData.productOwner);
     const config = {
         headers: {
             'Content-Type': 'multipart/form-data'
@@ -39,6 +40,7 @@ export const updateProductReq = async formData => {
     fd.append('category', formData.category);
     fd.append('productImage', formData.productImage);
     fd.append('price', formData.price);
+    fd.append('productOwner',formData.productOwner);
     fd.append('oldImage', formData.oldImage);
 
     const config = {

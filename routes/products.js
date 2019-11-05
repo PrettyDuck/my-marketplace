@@ -77,7 +77,8 @@ router.post('/', upload.single('productImage'), [auth, [
     check('location', 'Location is required').not().isEmpty(),
     check('description', 'Description is required').not().isEmpty(),
     check('category', 'Category is required').not().isEmpty(),
-    check('price', 'Price is required').not().isEmpty()
+    check('price', 'Price is required').not().isEmpty(),
+    check('productOwner', 'Product owner is not specified').not().isEmpty()
 ]], async (req, res) => // using auth for a private route and express-validator as a second for checking  
 {
     // console.log(req);
@@ -89,7 +90,7 @@ router.post('/', upload.single('productImage'), [auth, [
             errors: errors.array()
         })
     }
-    const { name, location, description, category, price } = req.body;
+    const { name, location, description, category, price, productOwner } = req.body;
     try {
         const newProduct = new Product({
             name,
@@ -98,7 +99,8 @@ router.post('/', upload.single('productImage'), [auth, [
             category,
             productImage: req.file.path,
             price,
-            user: req.user.id
+            user: req.user.id,
+            productOwner
         });
         const product = await newProduct.save();
         res.json(product)
@@ -142,11 +144,12 @@ router.put('/:id', upload.any(), [auth, [
     check('location', 'Location is required').not().isEmpty(),
     check('description', 'Description is required').not().isEmpty(),
     check('category', 'Category is required').not().isEmpty(),
-    check('price', 'Price is required').not().isEmpty()
+    check('price', 'Price is required').not().isEmpty(),
+    check('productOwner', 'Product owner is not specified').not().isEmpty()
 ]], async (req, res) => {
     console.log(req.body);
     console.log(req.files);
-    const { name, location, description, category, productImage, price,oldImage } = req.body;
+    const { name, location, description, category, productImage, price, productOwner, oldImage } = req.body;
     // Build product object
     const productFields = {};
     if (name) productFields.name = name;
@@ -164,6 +167,7 @@ router.put('/:id', upload.any(), [auth, [
         })  // Deleting photo of our product from storage 
     }
     if (price) productFields.price = price;
+    if (productOwner) productFields.productOwner = productOwner;
 
     console.log(productFields);
     try {
