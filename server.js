@@ -1,8 +1,9 @@
 const express = require('express');
 const connectDB = require('./config/db');
+
 const app = express();
 
-// Connect To Data Base 
+// Connect To Data Base
 connectDB();
 
 // Init Middleware
@@ -16,6 +17,6 @@ app.use('/api/products', require('./routes/products')); // use route info from r
 app.use('/api/auth', require('./routes/auth')); // use route info from routes/auth when request is /api/auth
 
 app.use('/uploads', express.static('uploads'));
-app.use('/products/uploads', express.static('uploads')); 
+app.use('/products/uploads', express.static('uploads'));
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

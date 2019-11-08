@@ -142,13 +142,13 @@ nav {
 .search-name-field {
   box-sizing: border-box;
   width: 50%;
-  background-image: url("../src/res/search-icon.svg");
+  background-image: url('../src/res/search-icon.svg');
 }
 
 .search-location-field {
   box-sizing: border-box;
   width: 30%;
-  background-image: url("../src/res/location-icon.svg");
+  background-image: url('../src/res/location-icon.svg');
 }
 
 .search-submit {
@@ -293,7 +293,8 @@ nav {
   -moz-appearance: none;
   appearance: none;
   /* Remove default select styling */
-  background: url("./res/select-arrow-icon.svg") no-repeat 98% 50%, url("./res/select-icon.svg") no-repeat 2% 50%;
+  background: url('./res/select-arrow-icon.svg') no-repeat 98% 50%,
+    url('./res/select-icon.svg') no-repeat 2% 50%;
   margin: 12px 0 12px 12px;
 }
 
@@ -496,19 +497,16 @@ nav {
   height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
-  width:95%;
+  width: 95%;
 }
-.owner-button.add-fav {
-  background-image: url("./res/favorites-black.svg");
+.owner-button.fav {
+  background-image: url('./res/favorites-black.svg');
   background-repeat: no-repeat;
   background-position: 10% 50%;
   background-size: 17px 17px;
 }
-.owner-button.del-fav {
-  background-image: url("./res/favorites-black.svg");
-  background-repeat: no-repeat;
-  background-position: 10% 50%;
-  background-size: 17px 17px;
+.owner-button.fav:active {
+  background-color: #349a896f;
 }
 // Add Product
 
@@ -533,7 +531,7 @@ nav {
   -moz-appearance: none;
   appearance: none;
   /* Remove default select styling */
-  background: url("./res/select-arrow-icon.svg") no-repeat 98% 50%;
+  background: url('./res/select-arrow-icon.svg') no-repeat 98% 50%;
 }
 
 .form-group .photo-field {
@@ -598,9 +596,9 @@ nav {
     width: 100%;
     margin-bottom: 5px;
   }
- .owner-block{
-   width: 50%;
- }
+  .owner-block {
+    width: 50%;
+  }
   .nav-wrapper {
     flex-direction: column;
   }
