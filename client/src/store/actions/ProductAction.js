@@ -10,6 +10,12 @@ import {
   DELETE_PRODUCT,
   UPDATE_PRODUCT_REQUEST,
   UPDATE_PRODUCT,
+  SEARCH_PRODUCTS_REQUEST,
+  SEARCH_PRODUCTS,
+  FILTER_PRODUCTS_REQUEST,
+  FILTER_PRODUCTS,
+  FILTER_SEARCHED_PRODUCTS_REQUEST,
+  FILTER_SEARCHED_PRODUCTS,
 } from './types';
 
 export const getProductsRequest = () => {
@@ -75,5 +81,41 @@ export const productError = error => {
   return {
     type: PRODUCT_ERROR,
     payload: error.response.data.msg,
+  };
+};
+export const searchProductsRequest = data => {
+  return {
+    type: SEARCH_PRODUCTS_REQUEST,
+    payload: data,
+  };
+};
+export const searchProductsSuccess = data => {
+  return {
+    type: SEARCH_PRODUCTS,
+    payload: data,
+  };
+};
+export const filterProductsRequest = data => {
+  return {
+    type: FILTER_PRODUCTS_REQUEST,
+    payload: data,
+  };
+};
+export const filterProductsSuccess = data => {
+  return {
+    type: FILTER_PRODUCTS,
+    payload: data,
+  };
+};
+export const filterSearchedProductsRequest = data => {
+  return {
+    type: FILTER_SEARCHED_PRODUCTS_REQUEST,
+    payload: data,
+  };
+};
+export const filterSearchedProductsSuccess = data => {
+  return {
+    type: FILTER_SEARCHED_PRODUCTS,
+    payload: data,
   };
 };

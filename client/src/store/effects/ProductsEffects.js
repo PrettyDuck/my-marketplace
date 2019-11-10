@@ -13,6 +13,9 @@ import {
   deleteProductSuccess,
   updateProductSuccess,
   productError,
+  searchProductsSuccess,
+  filterProductsSuccess,
+  filterSearchedProductsSuccess,
 } from '../actions/ProductAction';
 import history from '../../history';
 
@@ -69,6 +72,33 @@ function* updateProduct(request) {
     console.log(error);
   }
 }
+function* searchProducts(request) {
+  try {
+    console.log(request);
+    yield put(searchProductsSuccess(request.payload));
+  } catch (error) {
+    yield put(productError(error));
+    console.log(error);
+  }
+}
+function* filterProducts(request) {
+  try {
+    console.log(request);
+    yield put(filterProductsSuccess(request.payload));
+  } catch (error) {
+    yield put(productError(error));
+    console.log(error);
+  }
+}
+function* filterSearchedProducts(request) {
+  try {
+    console.log(request);
+    yield put(filterSearchedProductsSuccess(request.payload));
+  } catch (error) {
+    yield put(productError(error));
+    console.log(error);
+  }
+}
 export function* productsSaga() {
   yield all([
     takeEvery('GET_PRODUCTS_REQUEST', getProducts),
@@ -76,5 +106,8 @@ export function* productsSaga() {
     takeEvery('ADD_PRODUCT_REQUEST', addProduct),
     takeEvery('DELETE_PRODUCT_REQUEST', deleteProduct),
     takeEvery('UPDATE_PRODUCT_REQUEST', updateProduct),
+    takeEvery('SEARCH_PRODUCTS_REQUEST', searchProducts),
+    takeEvery('FILTER_PRODUCTS_REQUEST', filterProducts),
+    takeEvery('FILTER_SEARCHED_PRODUCTS_REQUEST', filterSearchedProducts),
   ]);
 }

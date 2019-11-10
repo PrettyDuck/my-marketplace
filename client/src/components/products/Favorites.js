@@ -4,11 +4,11 @@ import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import { connect } from 'react-redux';
 
-const Favorites = ({ products: { products }, favorites }) => {
+const Favorites = ({ products: { products, searched }, favorites }) => {
   var favProducts = products.filter(item => favorites.indexOf(item._id) !== -1); // getting all items from products which have id's defined in favorites
   return (
     <Fragment>
-      <Navbar background={true} extendedBackground={true} isOnFavoritesPosition={true} />
+      <Navbar background={true} isOnFavoritesPosition={true} />
       <div className='content-wrapper'>
         <div className='favorites-label'>
           Saved Items{' '}
@@ -16,8 +16,8 @@ const Favorites = ({ products: { products }, favorites }) => {
         </div>
         {favProducts !== null ? (
           <div
-            className=' card-form products-wrapper'
-            style={{ gridTemplateRows: `repeat(${Math.ceil(favProducts.length / 4)},auto)` }}>
+            className='card-form products-wrapper'
+            style={{ gridTemplateRows: `repeat(${Math.ceil(products.length / 4)},auto)` }}>
             {favProducts.map(product => (
               <ProductItem product={product} key={product._id} />
             ))}

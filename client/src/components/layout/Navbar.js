@@ -8,6 +8,7 @@ import FavoritesWhite from '../../res/favorites-white.svg';
 import FavoritesFilled from '../../res/favorites-filled.svg';
 import UserInterface from './UserInterface';
 import UserIcon from './UserIcon';
+import SearchForm from './SearchForm';
 
 const Navbar = props => {
   const {
@@ -40,15 +41,6 @@ const Navbar = props => {
       <UserIcon color={`hsl(${colorForIcon}, 100%, 70%)`} iconWrapperStyle={iconWrapperStyle} />
     </Fragment>
   );
-  const SearchForm = (
-    <div className='card-container'>
-      <form className='card-form search-form'>
-        <input type='text' placeholder='Search product by name' className='search-name-field' />
-        <input type='text' placeholder='Location' className='search-location-field' />
-        <input type='submit' value='Search' className='search-submit' />
-      </form>
-    </div>
-  );
   const lightNavbar = (
     <Fragment>
       <nav>
@@ -58,7 +50,7 @@ const Navbar = props => {
           </Link>
           <ul className='nav-container'>
             <li>
-              <Link to='#'>
+              <Link to='/sell'>
                 <button className='nav-button'>Sell</button>
               </Link>
             </li>
@@ -109,7 +101,7 @@ const Navbar = props => {
           </ul>
         </div>
         {/*  //if extendedBackground equal true - SearchForm, false - null  */}
-        {extendedBackground ? SearchForm : null}
+        {extendedBackground ? <SearchForm /> : null}
         <UserInterface color={`hsl(${colorForIcon}, 100%, 70%)`} />
       </nav>
     </Fragment>
