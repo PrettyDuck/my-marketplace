@@ -30,9 +30,17 @@ const Filter = props => {
       }
     }
   }, [filterArg]);
+  useEffect(() => {
+    clearFilter(); // clear filter if we make a search
+    console.log('Cleared');
+  }, [searched]);
+
   const { filterCategory, filterPriceFrom, filterPriceTo } = filterArg;
   const onChange = e => {
     setFilterArg({ ...filterArg, [e.target.name]: e.target.value });
+  };
+  const clearFilter = () => {
+    setFilterArg({ filterCategory: '', filterPriceFrom: '', filterPriceTo: '' });
   };
   return (
     <form className='filter-form card-form'>
